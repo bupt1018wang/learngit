@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+<style>
+#pic li {
+display: block;
+}
+#pic li:nth-child(1){
+	position:absolute;
+	z-index: 1;
+}
+#pic li:nth-child(2){
+	position:absolute;
+	z-index: -2;
+}
+#pic li:nth-child(3){
+	position:absolute;
+	z-index: -3;
+}
+</style>
+<script src='jquery-2.1.1.js'></script>
+
+</head>
+<body>
+<div>
+    <ul id = 'pic' >
+        <li><img src="p1.jpg"/></li>
+        <li><img src="p2.jpg"/></li>
+        <li><img src="p3.jpg"/></li>
+
+    </ul>
+<input type="button" id='go' value='>'>
+</div>
+<script>
+
+
+//将script写在最底部避免js阻塞页面加载
+var index=0;//当前显示的第几张图，默认开始为0；
+var mg=$("#pic li");//将焦点图储存为一个变量方便调用节省下载调用查询时间。
+var len=mg.length;//焦点图图片数量
+ 
+function play(n){
+	if(n<len-1){
+		mg.eq(n).fadeOut(200);
+		mg.eq(n+1).fadeIn(200);
+	}else{
+		mg.eq(n).fadeOut(200);
+		mg.eq(0).fadeIn(200);
+	}
+
+}
+ 
+setInterval(function(){
+play(index);
+index++;
+if(index==len){
+index=0;
+}
+},3000);
+
+</script>
+</body>
+</html>
